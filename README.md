@@ -52,3 +52,4 @@ export JEKNINS_TOKEN=mytoken
 * `-v` The view containing the job to be triggered.
 * `-j` The name of the job to be triggered.
 * `-p` The parameters to pass to the job, in the format 'key1=value1;key2=value2'.
+* For more information try `--help`.

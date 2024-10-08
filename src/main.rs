@@ -1,3 +1,5 @@
+// @author h2cone
+
 use clap::Parser;
 use dotenv::dotenv;
 use std::env;
@@ -19,6 +21,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .send()
         .await?;
 
+    if conf.silent {
+        return Ok(());
+    }
     let loc = resp
         .headers()
         .get("location")
@@ -85,6 +90,9 @@ struct Conf {
     job: String,
     #[arg(short, value_parser = parse_key_val::<String, String>, value_delimiter = ';')]
     params: Vec<(String, String)>,
+    /// Silent mode
+    #[arg(short, long, default_value = "false")]
+    silent: bool,
 }
 
 fn parse_key_val<T, U>(s: &str) -> Result<(T, U), Box<dyn Error + Send + Sync + 'static>>
